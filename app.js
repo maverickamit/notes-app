@@ -19,4 +19,22 @@ yargs.command({
   }
 });
 
-console.log(yargs.argv);
+//create list command
+yargs.command({
+  command: "list",
+  describe: "listing note",
+  handler: function() {
+    console.log("listing note");
+  }
+});
+
+//create remove command
+yargs.command({
+  command: "read",
+  describe: "reading note",
+  handler: function() {
+    console.log("reading note");
+  }
+});
+
+yargs.parse();
