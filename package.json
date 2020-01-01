@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^3.0.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "yargs": "^15.0.2"
   }
 }
