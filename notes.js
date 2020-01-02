@@ -36,7 +36,21 @@ const addNote = function(title, body) {
   }
 };
 
+const removeNote = function(title) {
+  const notes = loadNotes();
+  const notesToKeep = notes.filter(function(singlenote) {
+    return singlenote.title !== title;
+  });
+  saveNote(notesToKeep);
+  if (notesToKeep.length === notes.length) {
+    console.log("There is no note with this title.");
+  } else {
+    console.log("The note is deleted");
+  }
+};
+
 module.exports = {
   getNotes: getNotes,
-  addNote: addNote
+  addNote: addNote,
+  removeNote: removeNote
 };
