@@ -13,13 +13,27 @@ const loadNotes = function() {
   }
 };
 
+const saveNote = function(notes) {
+  const dataJSON = JSON.stringify(notes);
+  fs.writeFileSync("notes.json", dataJSON);
+};
+
 const addNote = function(title, body) {
-  fs.writeFileSync();
   const notes = loadNotes();
-  notes.push({
-    title: title,
-    body: body
+  const duplicateNotes = notes.filter(function(singlenote) {
+    return singlenote.title === title;
   });
+
+  if (duplicateNotes.length === 0) {
+    notes.push({
+      title: title,
+      body: body
+    });
+    saveNote(notes);
+    console.log("New note added.");
+  } else {
+    console.log("Note title is taken. Please try a new title.");
+  }
 };
 
 module.exports = {
