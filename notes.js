@@ -49,8 +49,15 @@ const removeNote = title => {
   }
 };
 
+const listNotes = () => {
+  console.log(chalk.blueBright.inverse("These are your notes!"));
+  const notes = loadNotes();
+  notes.forEach(element => console.log(chalk.yellow(element.title)));
+};
+
 module.exports = {
   getNotes,
   addNote,
-  removeNote
+  removeNote,
+  listNotes
 };
