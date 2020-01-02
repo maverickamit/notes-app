@@ -1,9 +1,11 @@
 const fs = require("fs");
-const getNotes = function() {
+const chalk = require("chalk");
+
+const getNotes = () => {
   return "your notes...";
 };
 
-const loadNotes = function() {
+const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
     const dataJSON = dataBuffer.toString();
@@ -13,44 +15,42 @@ const loadNotes = function() {
   }
 };
 
-const saveNote = function(notes) {
+const saveNote = notes => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
 };
 
-const addNote = function(title, body) {
+const addNote = (title, body) => {
   const notes = loadNotes();
-  const duplicateNotes = notes.filter(function(singlenote) {
-    return singlenote.title === title;
-  });
-
+  const duplicateNotes = notes.filter(singlenote => singlenote.title === title);
   if (duplicateNotes.length === 0) {
     notes.push({
       title: title,
       body: body
     });
     saveNote(notes);
-    console.log("New note added.");
+    console.log(chalk.green.inverse("New note added."));
   } else {
-    console.log("Note title is taken. Please try a new title.");
+    console.log(
+      chalk.red.inverse("Note title is taken. Please try a new title.")
+    );
   }
 };
 
-const removeNote = function(title) {
+const removeNote = title => {
   const notes = loadNotes();
-  const notesToKeep = notes.filter(function(singlenote) {
-    return singlenote.title !== title;
-  });
-  saveNote(notesToKeep);
+  const notesToKeep = notes.filter(singlenote => singlenote.title !== title);
+
   if (notesToKeep.length === notes.length) {
-    console.log("There is no note with this title.");
+    console.log(chalk.red.inverse("There is no note with this title."));
   } else {
-    console.log("The note is deleted");
+    saveNote(notesToKeep);
+    console.log(chalk.green.inverse("The note is deleted"));
   }
 };
 
 module.exports = {
-  getNotes: getNotes,
-  addNote: addNote,
-  removeNote: removeNote
+  getNotes,
+  addNote,
+  removeNote
 };
