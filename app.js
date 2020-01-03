@@ -48,12 +48,12 @@ yargs.command({
   }
 });
 
-//create remove command
+//create read command
 yargs.command({
   command: "read",
   describe: "reading note",
-  handler() {
-    console.log("reading note");
+  handler(argv) {
+    notesUtilities.readNote(argv.title);
   }
 });
 

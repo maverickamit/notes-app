@@ -20,6 +20,18 @@ const saveNote = notes => {
   fs.writeFileSync("notes.json", dataJSON);
 };
 
+const readNote = title => {
+  const notes = loadNotes();
+  const noteSelected = notes.find(singlenote => (singlenote.title === title));
+  if (noteSelected) {
+    console.log(chalk.blueBright.inverse(noteSelected.title));
+    console.log(chalk.yellow(noteSelected.body));
+  } else {
+    console.log(
+      chalk.red.inverse("Note title doesn't exist. Please try a new title.")
+    );
+  }
+};
 const addNote = (title, body) => {
   const notes = loadNotes();
   const duplicateNote = notes.find(singlenote => singlenote.title === title);
@@ -60,5 +72,6 @@ module.exports = {
   getNotes,
   addNote,
   removeNote,
-  listNotes
+  listNotes,
+  readNote
 };
