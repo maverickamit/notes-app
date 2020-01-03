@@ -1,8 +1,10 @@
+// Using ES6 notations
+
 const chalk = require("chalk");
 const yargs = require("yargs");
 const notesUtilities = require("./notes");
 
-//create add command
+//creating add command
 yargs.command({
   command: "add",
   describe: "adding note",
@@ -23,7 +25,7 @@ yargs.command({
   }
 });
 
-//create remove command
+//creating remove command
 yargs.command({
   command: "remove",
   describe: "removing note",
@@ -39,7 +41,7 @@ yargs.command({
   }
 });
 
-//create list command
+//creating list command
 yargs.command({
   command: "list",
   describe: "listing note",
@@ -48,7 +50,7 @@ yargs.command({
   }
 });
 
-//create read command
+//creating read command
 yargs.command({
   command: "read",
   describe: "reading note",

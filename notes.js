@@ -1,10 +1,9 @@
+// Using ES6 notations
+
 const fs = require("fs");
 const chalk = require("chalk");
 
-const getNotes = () => {
-  return "your notes...";
-};
-
+// function to load all the notes in a variable
 const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync("notes.json");
@@ -15,14 +14,21 @@ const loadNotes = () => {
   }
 };
 
+// function to save all notes in a JSON file
+
 const saveNote = notes => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync("notes.json", dataJSON);
 };
 
+// function to read a note selected by title
+
 const readNote = title => {
   const notes = loadNotes();
-  const noteSelected = notes.find(singlenote => (singlenote.title === title));
+
+  // using notes.find to save time instead of using notes.filter because there is only one match or less.
+
+  const noteSelected = notes.find(singlenote => singlenote.title === title);
   if (noteSelected) {
     console.log(chalk.blueBright.inverse(noteSelected.title));
     console.log(chalk.yellow(noteSelected.body));
@@ -32,9 +38,14 @@ const readNote = title => {
     );
   }
 };
+
+// function to add a note without any duplicate title
+
 const addNote = (title, body) => {
   const notes = loadNotes();
   const duplicateNote = notes.find(singlenote => singlenote.title === title);
+
+  // checking for duplicate title existing already
 
   if (!duplicateNote) {
     notes.push({
@@ -50,6 +61,8 @@ const addNote = (title, body) => {
   }
 };
 
+// function to remove a note selected by title
+
 const removeNote = title => {
   const notes = loadNotes();
   const notesToKeep = notes.filter(singlenote => singlenote.title !== title);
@@ -62,14 +75,17 @@ const removeNote = title => {
   }
 };
 
+// function to list down all notes in the console
+
 const listNotes = () => {
   console.log(chalk.blueBright.inverse("These are your notes!"));
   const notes = loadNotes();
   notes.forEach(element => console.log(chalk.yellow(element.title)));
 };
 
+// exporting the functions to be used from another file
+
 module.exports = {
-  getNotes,
   addNote,
   removeNote,
   listNotes,
